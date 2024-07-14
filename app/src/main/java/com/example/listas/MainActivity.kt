@@ -1,6 +1,7 @@
 package com.example.listas
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -8,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listas.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , OnClickListener{
     private lateinit var userAdapter: UserAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var binding: ActivityMainBinding
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //Pasamos un listado que puede cambiarse
-        userAdapter = UserAdapter(getUsers())
+        userAdapter = UserAdapter(getUsers(), this)
         linearLayoutManager = LinearLayoutManager(this)
 
 
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Usuarios"
 
         binding.recyclerView.apply {
+            setHasFixedSize(true) //tamaño de listas definido, rendimiento interno
             layoutManager = linearLayoutManager
             adapter = userAdapter
         }
@@ -68,19 +70,14 @@ class MainActivity : AppCompatActivity() {
         users.add(jesus)
         users.add(emma)
         users.add(stone)
-        users.add(antonio)
-        users.add(jesus)
-        users.add(emma)
-        users.add(stone)
-        users.add(antonio)
-        users.add(jesus)
-        users.add(emma)
-        users.add(stone)
-        users.add(antonio)
-        users.add(jesus)
-        users.add(emma)
-        users.add(stone)
+
 
         return users
+    }
+
+    //Evento de clic a traves del activity hacia el adaptador
+    override fun OnClick(user: User, position:Int) {
+        Toast.makeText(this, "$position:  ${user.getFullName()}", Toast.LENGTH_SHORT).show()
+
     }
 }

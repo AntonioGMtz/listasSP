@@ -10,7 +10,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.listas.databinding.ItemUserBinding
 import com.example.listas.databinding.ActivityMainBinding
 
-class UserAdapter (private val users: List<User>) : RecyclerView.Adapter<UserAdapter.ViewHolder>(){
+class UserAdapter (private val users: List<User>, private val listener: OnClickListener)
+    : RecyclerView.Adapter<UserAdapter.ViewHolder>(){
 
     private lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapter.ViewHolder {
@@ -25,6 +26,8 @@ class UserAdapter (private val users: List<User>) : RecyclerView.Adapter<UserAda
     override fun onBindViewHolder(holder: UserAdapter.ViewHolder, position: Int) {
         val user = users.get(position)
         with(holder){
+
+            setListener(user,position + 1) //llamada al evento del holder que pasa al activity
             binding.tvOrder.text = (position + 1).toString()
             binding.tvName.text = user.getFullName()
 
@@ -45,6 +48,11 @@ class UserAdapter (private val users: List<User>) : RecyclerView.Adapter<UserAda
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val binding = ItemUserBinding.bind(view)
+
+        //Preparando el adaptador para pasar los cambios a la actividad
+        fun setListener(user:User, position: Int){
+            binding.root.setOnClickListener{listener.OnClick(user, position)}
+        }
 
     }
 
