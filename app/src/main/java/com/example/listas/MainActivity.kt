@@ -80,22 +80,7 @@ class MainActivity : AppCompatActivity() {
         users.add(jesus)
         users.add(emma)
         users.add(stone)
-        users.add(antonio)
-        users.add(jesus)
-        users.add(emma)
-        users.add(stone)
-        users.add(antonio)
-        users.add(jesus)
-        users.add(emma)
-        users.add(stone)
-        users.add(antonio)
-        users.add(jesus)
-        users.add(emma)
-        users.add(stone)
-        users.add(antonio)
-        users.add(jesus)
-        users.add(emma)
-        users.add(stone)
+
         return users
     }
 }
